@@ -3,6 +3,8 @@ from dearpygui import dearpygui as dpg
 from openai import OpenAI
 import threading
 import pyperclip
+import warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 #OpenAi API initilization
 client = OpenAI(
@@ -149,7 +151,6 @@ with dpg.window(label="COMP-AI-LER", pos=(0, 0), width=600, height=580, no_focus
     #header and logo
     dpg.add_text("Welcome to COMP-AI-LER" , pos=(17, 42))
     dpg.add_image(logo_texture, tag="logo_image" , pos=(5, 50), width=200 , height=200)
-    dpg.add_same_line()
 
     dpg.add_spacer(height=2)
     dpg.add_text("Models" , pos=(420,22))
@@ -159,13 +160,11 @@ with dpg.window(label="COMP-AI-LER", pos=(0, 0), width=600, height=580, no_focus
     dpg.add_spacer(height=2)
     dpg.add_text("Your Question" , pos=(350,65))
     dpg.add_input_text(tag="question_input", multiline=True, pos=(220,88), height=100,width=360,callback=text_callback)
-    dpg.add_same_line()
 
     #tech stack input box
     dpg.add_spacer(height=2)
     dpg.add_text("Tech Stack/Language" , pos=(330,187))
     dpg.add_input_text(tag="tech_input",multiline=True, pos=(220,209) ,height=50,width=360,callback=text_callback)
-    dpg.add_same_line()
     dpg.add_spacer(height=2)
 
     # Submit button
@@ -173,12 +172,12 @@ with dpg.window(label="COMP-AI-LER", pos=(0, 0), width=600, height=580, no_focus
     dpg.add_spacer(height=12)
 
     # Copy Response Button
-    dpg.add_text("Response:")
+    dpg.add_text("Response:" , pos=(9,280))
     dpg.add_button(label="Copy", tag="copy_status",callback=copy_response, width=100, height=25,pos=(85, 280))
 
     #Response Text
-    dpg.add_separator()
-    dpg.add_input_text(tag="response_text", multiline=True, callback=text_callback, readonly=True, width=582, height=240)
+    dpg.add_separator(pos=(9,305))
+    dpg.add_input_text(tag="response_text", multiline=True, callback=text_callback, readonly=True, width=582, height=240 , pos=(9,315))
 
 # Create a viewport without OS decorations (borderless, no title bar)
 dpg.create_viewport(title="     ", width=616, height=600, small_icon="image.png", large_icon="image.png", resizable=False)#decorated=False
